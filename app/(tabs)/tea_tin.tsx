@@ -1,18 +1,18 @@
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
-import { useFetchUsers } from "../../components/utils/fetchEmail";
+import { useFetchTea } from "../../components/utils/fetchTea";
 import { Text, View, StyleSheet } from "react-native";
 
 export default function TeaScreen() {
-  const { users, fetchError } = useFetchUsers(); // Use the custom hook
+  const { teas, fetchError } = useFetchTea(); // Use the custom hook
 
   return (
     <View style={styles.container}>
       {fetchError && <Text style={styles.text}>{fetchError}</Text>}
-      {users && (
+      {teas && (
         <View>
-          {users.map((user: { id: Key | null | undefined; user_email: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Text key={user.id} style={styles.emailText}>
-              {user.user_email}
+          {teas.map((tea: { id: Key | null | undefined; tea_name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
+            <Text key={tea.id} style={styles.emailText}>
+              {tea.tea_name}
             </Text>
           ))}
         </View>
