@@ -1,45 +1,16 @@
-import supabase from "../config/supabaseClient";
-import { useEffect, useState } from "react";
-import { fetchEmail } from "../../components/utils/fetchEmail";
-import { Link } from "expo-router";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import { useFetchUsers } from "../../components/utils/fetchEmail";
+import { Text, View, StyleSheet } from "react-native";
 
 export default function Index() {
-  const [fetchError, setFetchError] = useState<string | null>(null);
-  const [users, setUsers] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { data, error } = await supabase
-        .from("users")
-        .select("*");
-    
-      if (error) {
-        console.error("Error fetching users:", error);
-        setFetchError("Could not fetch users");
-        setUsers([]);
-      } else {
-        console.log("Fetched data:", data); // Log the fetched data
-        setUsers(data); // Update the state
-        console.log(users);
-        setFetchError(null);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  // New useEffect to monitor `users` state
-  useEffect(() => {
-    console.log("Updated users state:", users);
-  }, [users]);
+  const { users, fetchError } = useFetchUsers(); // Use the custom hook
 
   return (
     <View style={styles.container}>
       {fetchError && <Text style={styles.text}>{fetchError}</Text>}
       {users && (
         <View>
-          {users.map((user) => (
+          {users.map((user: { id: Key | null | undefined; user_email: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
             <Text key={user.id} style={styles.emailText}>
               {user.user_email}
             </Text>
@@ -49,7 +20,6 @@ export default function Index() {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -61,13 +31,8 @@ const styles = StyleSheet.create({
   text: {
     color: "black",
   },
-  button: {
-    fontSize: 20,
-    textDecorationLine: "underline",
-    color: "black",
-  },
   emailText: {
     fontSize: 16,
     color: "black",
-  }
+  },
 });
