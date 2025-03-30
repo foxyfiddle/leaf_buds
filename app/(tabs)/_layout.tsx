@@ -34,8 +34,20 @@ export default function TabsLayout() {
                 size={24} 
                 color="white" 
             />,
-          title: "",
-          
+          title: "HOME",
+        }}
+      />
+      <Tabs.Screen
+        name="tea_tin"
+        options={{
+          headerTitle: "Leaf Buds",
+          tabBarIcon: ({focused, color}) => 
+            <Ionicons 
+                name={focused ? "leaf" : "leaf-outline"} 
+                size={24} 
+                color="white" 
+            />,
+          title: "TEA",
         }}
       />
       <Tabs.Screen
@@ -44,11 +56,11 @@ export default function TabsLayout() {
           headerTitle: "Leaf Buds",
           tabBarIcon: ({focused, color}) => 
             <Ionicons 
-                name={focused ? "journal-sharp" : "journal-outline"} 
+                name={focused ? "information-outline" : "information-circle-outline"} 
                 size={24} 
                 color="white" 
             />,
-          title: "",
+          title: "ABOUT",
         }}
       />
     </Tabs>
