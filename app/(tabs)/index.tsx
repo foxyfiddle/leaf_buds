@@ -7,16 +7,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      {fetchError && <Text style={styles.text}>{fetchError}</Text>}
-      {users && (
-        <View>
-          {users.map((user: { id: Key | null | undefined; user_email: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Text key={user.id} style={styles.emailText}>
-              {user.user_email}
-            </Text>
-          ))}
-        </View>
-      )}
+      <Text style={styles.text}>Welcome to Tea Buds!</Text>
     </View>
   );
 }
