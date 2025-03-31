@@ -10,9 +10,9 @@ export default function TeaScreen() {
       {fetchError && <Text style={styles.text}>{fetchError}</Text>}
       {teas && (
         <View>
-          {teas.map((tea: { id: Key | null | undefined; tea_name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
+          {teas.map((tea: { id: Key | null | undefined; tea_name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; tea_origin: string}) => (
             <Text key={tea.id} style={styles.emailText}>
-              {tea.tea_name}
+              {tea.tea_name} | {tea.tea_origin}
             </Text>
           ))}
         </View>
