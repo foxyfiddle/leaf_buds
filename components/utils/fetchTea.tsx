@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import supabase from "../../app/config/supabaseClient";
+import { supabase } from "../../app/config/supabaseClient";
 
 export function useFetchTea() {
   const [fetchError, setFetchError] = useState<string | null>(null);

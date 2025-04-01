@@ -1,13 +1,55 @@
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
+import { supabase } from "../app/config/supabaseClient"; // Import the Supabase client
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = () => {
-    // Handle form submission
-    Alert.alert("Email submitted", email);
-    console.log("Email submitted:", email);
+  const handleSubmit = async () => {
+    if (!email) {
+      Alert.alert("Error", "Please enter an email address.");
+      return;
+    }
+
+    try {
+      // Check if the email already exists in the database
+      const { data: existingUser, error: fetchError } = await supabase
+        .from("users") // Replace "users" with your table name
+        .select("*")
+        .eq("user_email", email)
+        .single();
+
+      if (fetchError && fetchError.code !== "PGRST116") {
+        // Handle unexpected errors (e.g., network issues)
+        console.error("Error fetching user:", fetchError);
+        Alert.alert("Error", "An error occurred while checking the email.");
+        return;
+      }
+
+      if (existingUser) {
+        // Email already exists
+        Alert.alert("Error", "This email is already registered.");
+        return;
+      }
+
+      // Insert the email into the database
+      const { data: newUser, error: insertError } = await supabase
+        .from("users") // Replace "users" with your table name
+        .insert([{ user_email: email }]);
+
+      if (insertError) {
+        console.error("Error inserting user:", insertError);
+        Alert.alert("Error", "An error occurred while saving the email.");
+        return;
+      }
+
+      // Success
+      Alert.alert("Success", "Email registered successfully!");
+      console.log("New user added:", newUser);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      Alert.alert("Error", "An unexpected error occurred.");
+    }
   };
 
   return (
@@ -15,7 +57,7 @@ const SignInForm = () => {
       <TextInput
         style={styles.input}
         placeholder="email@domain.com"
-        placeholderTextColor="#737373" // Neutral gray color
+        placeholderTextColor="#737373"
         value={email}
         onChangeText={(text) => setEmail(text)}
         keyboardType="email-address"
@@ -37,15 +79,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   input: {
-    flex: 1,
-    paddingHorizontal: 16, // Match button padding
-    paddingVertical: 10, // Match button padding
+    paddingHorizontal: 16,
+    paddingVertical: 10,
     width: "100%",
-    height: 50, // Match button height
-    backgroundColor: "#f4f4f4", // Match button background color
-    borderRadius: 8, // Match button border radius
-    borderWidth: 1, // Optional: Add border to match button
-    borderColor: "#d4d4d4", // Optional: Match button border color
+    height: 50,
+    backgroundColor: "#f4f4f4",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#white",
     color: "black",
     fontSize: 16,
     marginBottom: 16,
