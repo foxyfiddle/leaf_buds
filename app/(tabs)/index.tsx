@@ -7,17 +7,12 @@ import SignInTerms from "../../components/Signin_terms";
 import { Text, View, StyleSheet } from "react-native";
 
 export default function Index() {
+  console.log("Home component rendered");
   
 
   return (
     <View style={styles.container}>
-        <SignInHeader />
-        <Text style={styles.title}>Create an account</Text>
-        <Text style={styles.subtitle}>Enter your email to sign up for this app</Text>
-        <SignInForm />
-        <SignInDivider />
-        <SignInButton />
-        <SignInTerms />
+        <Text style={styles.title}>Welcome to the home page</Text>
     </View>
   );
 }
