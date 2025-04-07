@@ -1,18 +1,23 @@
 
-import SignInHeader from "../../components/Signin_header";
-import SignInForm from "../../components/Signin_form";
-import SignInDivider from "../../components/Signin_divider";
-import SignInButton from "../../components/Signin_social_buttons";
-import SignInTerms from "../../components/Signin_terms";
-import { Text, View, StyleSheet } from "react-native";
+import RouteToTeaTinButtons from "../../components/index_page/route_button";
+import { Text, View, StyleSheet, Image } from "react-native";
 
 export default function Index() {
-  console.log("Home component rendered");
   
 
   return (
     <View style={styles.container}>
-        <Text style={styles.title}>Welcome to the home page</Text>
+      <Image
+        source={require("../../assets/images/tea_icon.png")}
+        style={{
+          width: 80, // Set a fixed width for the icon
+          height: undefined, // Let the height be determined by the aspect ratio
+          aspectRatio: 1, // Maintain a square aspect ratio
+          marginBottom: 50,
+        }}
+      />
+        <Text style={styles.title}>Start by adding your first tea to your tea tin</Text>
+        <RouteToTeaTinButtons />
     </View>
   );
 }
@@ -29,10 +34,10 @@ const styles = StyleSheet.create({
     fontWeight: "600", // Equivalent to "font-semibold"
     color: "black",
     marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 14, // Equivalent to "text-sm"
-    color: "gray",
+    paddingHorizontal: 28,
     textAlign: "center",
+    lineHeight: 24, // Equivalent to "leading-6"
+    letterSpacing: 0.5, // Equivalent to "tracking-wide"
+    fontFamily: "Inter_600SemiBold", // Use the Inter font family
   },
 });

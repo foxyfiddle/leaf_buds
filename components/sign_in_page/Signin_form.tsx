@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
-import { supabase } from "../app/config/supabaseClient"; // Import the Supabase client
+import { supabase } from "../../app/config/supabaseClient"; // Import the Supabase client
 import { router } from "expo-router";
 
 const SignInForm = () => {

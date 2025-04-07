@@ -28,7 +28,24 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          headerTitle: "Leaf Buds",
+          headerTitle: "Dashboard",
+          headerStyle: {
+            backgroundColor: "white",
+          },
+          headerTitleStyle: {
+            fontSize: 14, // Change the font size of the header title
+            fontWeight: "500", // Optional: Make the text bold
+            color: "black", // Optional: Change the text color
+          },
+          headerRight: () => (
+            <Ionicons
+              name="notifications-outline" // Icon for notifications
+              size={24}
+              color="black"
+              style={{ marginRight: 16 }} // Add some margin to the right
+              onPress={() => alert("Notifications clicked!")} // Example action
+            />
+          ),
           tabBarIcon: ({ focused, color }: { focused: boolean; color: string }) => 
             <Ionicons 
           name={focused ? "home-sharp" : "home-outline"} 
@@ -67,3 +84,5 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+

@@ -1,9 +1,9 @@
 
-import SignInHeader from "../components/Signin_header";
-import SignInForm from "../components/Signin_form";
-import SignInDivider from "../components/Signin_divider";
-import SignInButton from "../components/Signin_social_buttons";
-import SignInTerms from "../components/Signin_terms";
+import SignInHeader from "../components/sign_in_page/Signin_header";
+import SignInForm from "../components/sign_in_page/Signin_form";
+import SignInDivider from "../components/sign_in_page/Signin_divider";
+import SignInButton from "../components/sign_in_page/Signin_social_buttons";
+import SignInTerms from "../components/sign_in_page/Signin_terms";
 import { Text, View, StyleSheet } from "react-native";
 
 export default function SignIn() {
